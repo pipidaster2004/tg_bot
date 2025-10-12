@@ -15,10 +15,9 @@ def main()->None:
                         text = update["message"]["text"],
                     )
                     print(".", end="", flush=True)
-                    next_update_offset = max(next_update_offset, update["update_id"] + 1)
                 else:
                     print("text not in message\n")
-                    next_update_offset = update["update_id"] + 1
+                next_update_offset = max(next_update_offset, update["update_id"] + 1)
             time.sleep(1)
     except KeyboardInterrupt:
         print("Bye!")
