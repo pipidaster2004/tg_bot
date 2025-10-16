@@ -1,24 +1,12 @@
-import time
-import bot.telegram_client
-import bot.database_client
+from bot.dispatcher import Dispatcher
+from bot.handlers.message_echo import MessageEcho
+from bot.long_polling import start_long_polling
 
 def main()->None:
-    next_update_offset = 0
     try:
-        while True:
-            updates = bot.telegram_client.getUpdates(offset=next_update_offset)
-            bot.database_client.persist_updates(updates)
-            for update in updates:
-                if ("message" in update and "text" in update["message"]): 
-                    bot.telegram_client.sendMessage(
-                        chat_id = update["message"]["chat"]["id"],
-                        text = update["message"]["text"],
-                    )
-                    print(".", end="", flush=True)
-                else:
-                    print("text not in message\n")
-                next_update_offset = max(next_update_offset, update["update_id"] + 1)
-            time.sleep(1)
+        dispatcher = Dispatcher()
+        dispatcher.add_handler(MessageEcho())
+        start_long_polling(dispatcher)
     except KeyboardInterrupt:
         print("Bye!")
 
