@@ -7,7 +7,7 @@ from bot.long_polling import start_long_polling
 def main()->None:
     try:
         dispatcher = Dispatcher()
-        dispatcher.add_handler(
+        dispatcher.add_handlers(
                                 DatabaseLogger(), 
                                 MessageTextEcho(),
                                 MessagePhotoEcho(),

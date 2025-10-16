@@ -17,11 +17,10 @@ def recreate_database()->None:
                            )
     connection.close()
         
-def persist_updates(update: dict)->None:
+def persist_update(update: dict)->None:
     connection = sqlite3.connect(os.getenv("SQLITE_DATABASE_PATH"))
-    data = []
-    data.append((json.dumps(update, ensure_ascii=False, indent=2),))
+    json_data = json.dumps(update, ensure_ascii=False, indent=2)
     with connection:
-        connection.executemany("INSERT INTO telegram_updates (payload) VALUES (?)", data,) 
+        connection.execute("INSERT INTO telegram_updates (payload) VALUES (?)", (json_data,)) 
     connection.close()
-    print(f"add {data} to table")
+    print(f"add {json_data} to table")
