@@ -7,10 +7,10 @@ class Dispatcher:
     def add_handler(self, *handlers: list[Handler]) -> None:
         for handler in handlers:
             self._handlers.append(handler)
+            print(f"add handler {str(handler)}")
 
     def dispatch(self, update: dict) -> None:
         for handler in self._handlers:
             if handler.can_handle(update):
                 signal = handler.handle(update)
                 if not signal: break
-                

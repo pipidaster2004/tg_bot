@@ -30,5 +30,10 @@ def getUpdates(**params)->dict:
 def sendMessage(chat_id: int, text: str, **params)->dict:
     return makeRequest("sendMessage", chat_id=chat_id, text=text, **params)
 
+def sendPhoto(chat_id, photo=None, caption=None, **params) -> dict:
+    if photo is not None:
+        params["photo"] = photo
+    return makeRequest("sendPhoto", chat_id=chat_id, **params)
+
 def getMe()->dict:
     return makeRequest("getMe")
