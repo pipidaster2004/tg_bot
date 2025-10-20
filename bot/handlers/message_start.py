@@ -36,7 +36,7 @@ class MessageStart(Handler):
                         ],
                         [
                             {"text": "Bavarian", "callback_data": "pizza_bavarian"},
-                            {"text": "devils", "callback_data": "pizza_devils"},
+                            {"text": "Devils", "callback_data": "pizza_devils"},
                         ],
                     ]
                 }
