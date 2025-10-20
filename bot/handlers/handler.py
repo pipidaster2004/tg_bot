@@ -7,13 +7,13 @@ class HandlerStatus(Enum):
 
 class Handler(ABC):
     @abstractmethod
-    def can_handle(self, update: dict) -> bool:
+    def can_handle(self, update: dict, state: str, order_json: dict) -> bool:
         pass
 
     @abstractmethod
-    def handle(self, update:dict) -> HandlerStatus:
+    def handle(self, update: dict, state: str, order_json: dict) -> HandlerStatus:
         """
-        return: -true:  signal for dispatcher to continue processing
-                -fasle: signal for dispatcher to stop processing
+        return: HandlerStatus.CONTINUE:  signal for dispatcher to continue processing
+                HandlerStatus.STOP: signal for dispatcher to stop processing
         """
         pass
