@@ -1,4 +1,9 @@
 from abc import ABC, abstractmethod
+from enum import Enum
+
+class HandlerStatus(Enum):
+    CONTINUE = 1
+    STOP = 2
 
 class Handler(ABC):
     @abstractmethod
@@ -6,7 +11,7 @@ class Handler(ABC):
         pass
 
     @abstractmethod
-    def handle(self, update:dict) -> bool:
+    def handle(self, update:dict) -> HandlerStatus:
         """
         return: -true:  signal for dispatcher to continue processing
                 -fasle: signal for dispatcher to stop processing

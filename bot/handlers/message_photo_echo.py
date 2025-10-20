@@ -1,4 +1,4 @@
-from bot.handler import Handler
+from bot.handlers.handler import Handler, HandlerStatus
 from bot.telegram_client import sendPhoto
 
 
@@ -6,7 +6,7 @@ class MessagePhotoEcho(Handler):
     def can_handle(self, update: dict) -> bool:
         return "message" in update and "photo" in update["message"]
 
-    def handle(self, update:dict) -> bool:
+    def handle(self, update:dict):
         photos = update["message"]["photo"]
         if photos:
             largest_photo = photos[-1]
@@ -17,4 +17,4 @@ class MessagePhotoEcho(Handler):
             )
             print(f"Sent photo with file_id: {file_id}")
         
-        return False
+        return HandlerStatus.STOP
