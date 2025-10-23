@@ -24,8 +24,6 @@ class PizzaFinish(Handler):
         }
 
         order_type = order_mapping.get(callback_data)
-        order_json["order"] = order_type
-        bot.database_client.update_user_order(telegram_id, order_json)
         bot.telegram_client.answerCallbackQuery(update["callback_query"]["id"])
         bot.telegram_client.deleteMessage(
             chat_id = update["callback_query"]["message"]["chat"]["id"],
@@ -37,7 +35,7 @@ class PizzaFinish(Handler):
         else:
             order_text = "No order found"
         if order_type == "Confrim":
-            bot.database_client.update_user_state(telegram_id, "APROVED")
+            bot.database_client.update_user_state(telegram_id, "ORDER_FINISHED")
             bot.telegram_client.sendMessage(
                 chat_id = update["callback_query"]["message"]["chat"]["id"],
                 text = order_text
