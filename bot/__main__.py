@@ -1,5 +1,5 @@
-from bot.dispatcher import Dispatcher
 from bot.domain.messenger import Messenger
+from bot.dispatcher import Dispatcher
 from bot.domain.storage import Storage
 from bot.handlers import get_handlers
 from bot.infrastructure.messenger_telegram import MessengerTelegram
