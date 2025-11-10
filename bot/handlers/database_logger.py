@@ -5,22 +5,22 @@ from bot.handlers.handler import Handler, HandlerStatus
 
 class DatabaseLogger(Handler):
     def can_handle(
-            self,
-            update: dict,
-            state: str,
-            order_json: dict,
-            storage: Storage,
-            messenger: Messenger,
-        ) -> bool:
+        self,
+        update: dict,
+        state: str,
+        order_json: dict,
+        storage: Storage,
+        messenger: Messenger,
+    ) -> bool:
         return True
 
     def handle(
-            self,
-            update: dict,
-            state: str,
-            order_json: dict,
-            storage: Storage,
-            messenger: Messenger,
-        ):
+        self,
+        update: dict,
+        state: str,
+        order_json: dict,
+        storage: Storage,
+        messenger: Messenger,
+    ):
         storage.persist_update(update)
         return HandlerStatus.CONTINUE

@@ -15,7 +15,7 @@ class Handler(ABC):
     def can_handle(
         self,
         update: dict,
-        state: str, 
+        state: str,
         order_json: dict,
         storage: Storage,
         messenger: Messenger,

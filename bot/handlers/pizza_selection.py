@@ -1,20 +1,18 @@
 import json
 from bot.domain.messenger import Messenger
 from bot.domain.storage import Storage
-import messenger
-import storage
 from bot.handlers.handler import Handler, HandlerStatus
 
 
 class PizzaSelection(Handler):
     def can_handle(
-            self,
-            update: dict,
-            state: str,
-            order_json: dict,
-            storage: Storage,
-            messenger: Messenger,
-        ):
+        self,
+        update: dict,
+        state: str,
+        order_json: dict,
+        storage: Storage,
+        messenger: Messenger,
+    ):
         if "callback_query" not in update:
             return False
 
@@ -25,13 +23,13 @@ class PizzaSelection(Handler):
         return callback_data.startswith("pizza_")
 
     def handle(
-            self,
-            update: dict,
-            state: str,
-            order_json: dict,
-            storage: Storage,
-            messenger: Messenger,
-        ):
+        self,
+        update: dict,
+        state: str,
+        order_json: dict,
+        storage: Storage,
+        messenger: Messenger,
+    ):
         telegram_id = update["callback_query"]["from"]["id"]
         callback_data = update["callback_query"]["data"]
 

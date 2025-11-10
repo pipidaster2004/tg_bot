@@ -1,21 +1,19 @@
 import json
 
-import bot.database_client
 from bot.domain.messenger import Messenger
 from bot.domain.storage import Storage
-import bot.telegram_client
 from bot.handlers.handler import Handler, HandlerStatus
 
 
 class MessageStart(Handler):
     def can_handle(
-            self,
-            update: dict,
-            state: str,
-            order_json: dict,
-            storage: Storage,
-            messenger: Messenger,
-        ):
+        self,
+        update: dict,
+        state: str,
+        order_json: dict,
+        storage: Storage,
+        messenger: Messenger,
+    ):
         return (
             "message" in update
             and "text" in update["message"]
@@ -23,13 +21,13 @@ class MessageStart(Handler):
         )
 
     def handle(
-            self,
-            update: dict,
-            state: str,
-            order_json: dict,
-            storage: Storage,
-            messenger: Messenger,
-        ):
+        self,
+        update: dict,
+        state: str,
+        order_json: dict,
+        storage: Storage,
+        messenger: Messenger,
+    ):
         telegram_id = update["message"]["from"]["id"]
 
         storage.cleare_user_state_and_order(telegram_id)
